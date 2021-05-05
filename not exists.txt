@@ -1,0 +1,9 @@
+
+https://leetcode.com/problems/customers-who-never-order/submissions/
+
+
+
+# Write your MySQL query statement below
+
+select name as Customers from customers c
+where not exists(select 1 from Orders  where customerid = c.id);

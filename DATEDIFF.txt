@@ -1,0 +1,15 @@
+
+https://leetcode.com/problems/rising-temperature/submissions/
+
+-- date 날짜 비교 할때는 날짜 함수 를 사용해야 한다 그냥 더하기 하다간 틀린다 .
+;;
+
+
+SELECT
+    weather.id AS 'Id'
+FROM
+    weather
+        JOIN
+    weather w ON DATEDIFF(weather.recordDate, w.recordDate) = 1
+        AND weather.Temperature > w.Temperature
+;

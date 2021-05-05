@@ -1,0 +1,32 @@
+
+https://leetcode.com/problems/department-highest-salary/submissions/
+
+-- max 윈도우 함수
+
+# Write your MySQL query statement below
+select Department,Employee,Salary
+from (select d.Name as Department,e.Name Employee ,e.Salary as Salary
+        ,max(e.Salary) over(partition by d.Name) as Max_Salary
+        from Employee e join Department d on(e.DepartmentId = d.Id))a
+where Max_Salary = Salary;
+
+
+----where in 사용 
+
+SELECT
+    Department.name AS 'Department',
+    Employee.name AS 'Employee',
+    Salary
+FROM
+    Employee
+        JOIN
+    Department ON Employee.DepartmentId = Department.Id
+WHERE
+    (Employee.DepartmentId , Salary) IN
+    (   SELECT
+            DepartmentId, MAX(Salary)
+        FROM
+            Employee
+        GROUP BY DepartmentId
+    )
+;

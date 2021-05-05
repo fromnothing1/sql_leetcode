@@ -1,0 +1,15 @@
+
+https://leetcode.com/problems/department-top-three-salaries/submissions/
+
+dense_rank 최상위 3개 
+
+
+# Write your MySQL query statement below
+
+
+select Department,Employee,Salary from
+(select d.Name as Department, e.name as Employee, e.salary as Salary,
+  dense_rank() over(partition by DepartmentId  order by salary desc) R
+ from Employee e join  Department d on e.DepartmentId =d.Id)a
+ where R < 4
+;
